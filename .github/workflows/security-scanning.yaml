@@ -65,9 +65,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
-      # No Docker build or login required for this demo
-      # Simply pull and scan a public image
+      
+      # Login to Docker Hub using secrets
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      # For demo purposes, pulling a public image
+      # You could build your own image here instead
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
