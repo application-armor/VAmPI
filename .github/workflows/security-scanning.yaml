@@ -30,12 +30,7 @@ jobs:
           
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
-        
-      - name: Upload SAST results
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: ${{ runner.temp }}/codeql_results
-          
+  
   # SCA scanning with Dependency-Check
   sca-scan:
     name: Software Composition Analysis
@@ -71,14 +66,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         
-      - name: Build container image
-        run: |
-          # Build your container image here
-          # Example:
-          # docker build -t test-image:latest .
-          # For demonstration, we'll scan an existing image
-          echo "Using ubuntu:latest as demo image"
-          
+      # No Docker build or login required for this demo
+      # Simply pull and scan a public image
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
