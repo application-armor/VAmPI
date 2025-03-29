@@ -23,10 +23,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         
+      # Auto-detect languages instead of specifying them
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: javascript, python, java
+          languages: javascript, python  # Removed Java
           
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
